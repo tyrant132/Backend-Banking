@@ -19,7 +19,7 @@ async function authMiddleware(req, res,next){
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const user = userModel.findById(decoded.userId)
+    const user = await userModel.findById(decoded.userId)
     req.user = user;
     return next();
 
@@ -46,7 +46,7 @@ async function authSystemUserMiddleware(req, res, next){
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const user = userModel.findById(decoded.userId).select("+systemUser");
+    const user = await userModel.findById(decoded.userId).select("+systemUser");
     if(!user.systemUser){
       return res.status(403).json({message: "forbidden access"})
     }

@@ -4,10 +4,10 @@ import { createAccountController ,getUserAccountController,getAccountBalanceCont
 
 const router = express.Router();
 
-router.post("/", authMiddleware, createAccountController)
+router.post("/create", authMiddleware, createAccountController)
 
 
-router.get("/",authMiddleware,getUserAccountController)
+router.get("/get",authMiddleware,getUserAccountController)
 
 router.get("/balance/:accountId",authMiddleware,getAccountBalanceController)
 export default router;
